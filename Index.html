@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pong+ Ultimate — Full Edition</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app" role="application" aria-label="Pong plus full edition">
+    <header>
+      <h1>Pong+ Ultimate — Full Edition</h1>
+      <div class="topbar">
+        <button id="startBtn" class="btn primary">Start</button>
+        <button id="pauseBtn" class="btn">Pause</button>
+        <button id="resetBtn" class="btn">Reset</button>
+        <div style="width:12px"></div>
+        <div class="overlay small" id="status">Stopped</div>
+      </div>
+    </header>
+
+    <div class="main">
+      <div class="left panel">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="scoreboard">
+            <span id="leftName">You</span>
+            <div id="scoreboard" style="display:flex;align-items:center;gap:8px">
+              <span id="leftScore">0</span>
+              <span class="sep">:</span>
+              <span id="rightScore">0</span>
+            </div>
+            <span id="rightName">CPU</span>
+          </div>
+          <div style="text-align:right">
+            <div class="small">Mode</div>
+            <select id="mode" class="select small" title="Mode">
+              <option value="single" selected>Single Player</option>
+              <option value="local">Two Player (local)</option>
+              <option value="online">Online (P2P)</option>
+              <option value="campaign">Campaign</option>
+              <option value="arcade">Arcade</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top:10px; position:relative" class="canvas-wrap">
+          <canvas id="gameCanvas" width="1000" height="560" role="img" aria-label="Pong canvas"></canvas>
+          <div id="centerMsg" class="message" style="display:none">Ready</div>
+        </div>
+
+        <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+          <div class="small">First to</div>
+          <input id="targetInput" class="input small" type="number" min="1" max="50" value="7" style="width:64px">
+          <div class="small">Difficulty</div>
+          <select id="difficulty" class="select small">
+            <option value="easy">Easy</option><option value="normal" selected>Normal</option><option value="hard">Hard</option>
+          </select>
+          <div style="flex:1"></div>
+          <div class="small">SFX</div>
+          <input id="sfxToggle" type="checkbox" checked>
+          <div class="small">Music</div>
+          <input id="musicToggle" type="checkbox" checked>
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+          <button id="shopBtn" class="btn">Shop</button>
+          <button id="historyBtn" class="btn">History</button>
+          <button id="achBtn" class="btn">Achievements</button>
+          <button id="exportBtn" class="btn">Export</button>
+          <button id="importBtn" class="btn">Import</button>
+          <div style="flex:1"></div>
+          <button id="fullBtn" class="btn">Fullscreen</button>
+        </div>
+
+      </div>
+
+      <div class="right panel">
+        <div class="section">
+          <label>Skins & Themes</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div class="skin-swatch" id="skinDefault" style="background:linear-gradient(90deg,#e6f0ff,#a6e8e0)"></div>
+            <div class="skin-swatch" id="skinRetro" style="background:linear-gradient(90deg,#ff9bb3,#ffd27a)"></div>
+            <div class="skin-swatch" id="skinNeon" style="background:linear-gradient(90deg,#9be8e0,#7ee7e0)"></div>
+            <div class="skin-swatch" id="skinMono" style="background:linear-gradient(90deg,#ddd,#bbb)"></div>
+            <div style="width:100%"></div>
+            <label class="tiny">Theme</label>
+            <select id="themeSel" class="select small">
+              <option value="dark">Dark</option><option value="ocean">Ocean</option><option value="sunset">Sunset</option><option value="matrix">Matrix</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="section">
+          <label>Online (P2P) — Manual Signaling</label>
+          <div class="small">No server — copy/paste the text to share sessions.</div>
+          <div style="margin-top:6px;display:flex;gap:6px">
+            <button id="hostBtn" class="btn">Host (Create Offer)</button>
+            <button id="joinBtn" class="btn">Join (Paste Offer)</button>
+          </div>
+          <textarea id="signalOut" class="input-export" placeholder="Offer / Answer appears here"></textarea>
+          <textarea id="signalIn" class="input-export" placeholder="Paste remote Offer/Answer here"></textarea>
+          <div style="display:flex;gap:6px;margin-top:6px">
+            <button id="applySignalBtn" class="btn">Apply</button>
+            <button id="closeConnBtn" class="btn">Close</button>
+          </div>
+          <div class="small" id="netStatus">Net: Disconnected</div>
+        </div>
+
+        <div class="section">
+          <label>High Scores</label>
+          <div class="list" id="highList"></div>
+        </div>
+
+        <div class="section">
+          <label>Match History</label>
+          <div class="list" id="historyList" style="height:120px"></div>
+        </div>
+
+        <div class="section">
+          <label>Controls & Support</label>
+          <div class="tiny">Left paddle: Mouse / Touch / Up/Down. Right paddle (local): W / S. Gamepad supported. Space = Pause/Resume. R = Reset. P = spawn powerup (debug).</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="tiny">Pong+ Ultimate — local-only by default. Online uses browser WebRTC DataChannel with manual signaling (copy/paste). All data stored locally in your browser's localStorage.</footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+              </html>
